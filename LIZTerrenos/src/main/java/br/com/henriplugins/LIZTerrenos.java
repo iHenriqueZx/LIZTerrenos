@@ -1,9 +1,9 @@
 package br.com.henriplugins;
 
-import br.com.henriplugins.commands.ComprarCommand;
+import br.com.henriplugins.commands.*;
 import br.com.henriplugins.database.DatabaseManager;
+import br.com.henriplugins.listeners.TerrenoListener;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,18 +16,14 @@ public class LIZTerrenos extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        // Configuração padrão
         saveDefaultConfig();
 
-        // Configurar Vault
         if (!setupEconomy()) {
             getLogger().severe("Vault não encontrado! Desabilitando o plugin...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
-        // Inicializar banco de dados
         databaseManager = new DatabaseManager();
         try {
             boolean useMySQL = getConfig().getBoolean("MySQL");
@@ -44,8 +40,11 @@ public class LIZTerrenos extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
 
-        // Registrar comandos
         getCommand("comprar").setExecutor(new ComprarCommand());
+        getCommand("confiar").setExecutor(new ConfiarCommand());
+        getCommand("desconfiar").setExecutor(new DesconfiarCommand());
+        getCommand("terreno").setExecutor(new TerrenoCommand());
+        getServer().getPluginManager().registerEvents(new TerrenoListener(databaseManager), this);
 
         getLogger().info("LIZTerrenos habilitado com sucesso!");
     }

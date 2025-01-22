@@ -2,7 +2,6 @@ package br.com.henriplugins.commands;
 
 import br.com.henriplugins.LIZTerrenos;
 import br.com.henriplugins.models.Terreno;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,7 +10,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
+
+import java.util.ArrayList;
 
 public class ComprarCommand implements CommandExecutor {
 
@@ -25,7 +25,7 @@ public class ComprarCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "Uso correto: /comprar <pequeno|medio|grande>");
+            player.sendMessage(ChatColor.RED + "Uso correto: /comprar <pequeno | medio | grande>");
             return true;
         }
 
@@ -51,36 +51,34 @@ public class ComprarCommand implements CommandExecutor {
                 return true;
         }
 
-        // Verificar se o Vault está habilitado
         if (!LIZTerrenos.getInstance().getServer().getPluginManager().isPluginEnabled("Vault")) {
             player.sendMessage(ChatColor.RED + "Vault não está habilitado no servidor.");
             return true;
         }
 
-        // Verificar saldo do jogador
         double balance = LIZTerrenos.getInstance().getEconomy().getBalance(player);
         if (balance < cost) {
             player.sendMessage(ChatColor.RED + "Você não tem dinheiro suficiente para comprar este terreno.");
             return true;
         }
 
-        // Retirar o dinheiro do jogador
         LIZTerrenos.getInstance().getEconomy().withdrawPlayer(player, cost);
 
-        // Definir localização inicial do terreno (posição atual do jogador)
         Location baseLocation = player.getLocation();
+        int halfSize = size / 2;
 
-        // Criar e salvar terreno
-        Terreno terreno = new Terreno(player.getUniqueId(), size, baseLocation.toString());
+        Location corner1 = baseLocation.clone().add(-halfSize, 0, -halfSize);
+        Location corner2 = baseLocation.clone().add(halfSize, 0, halfSize);
+
+        Terreno terreno = new Terreno(player.getUniqueId().toString(), size, corner1, corner2, new ArrayList<>(), cost);
         try {
-            LIZTerrenos.getInstance().getDatabaseManager().saveTerreno(terreno);
+            LIZTerrenos.getInstance().getDatabaseManager().saveTerreno(player, terreno);
         } catch (Exception e) {
             player.sendMessage(ChatColor.RED + "Erro ao salvar o terreno. Contate um administrador.");
             e.printStackTrace();
             return true;
         }
 
-        // Marcar as bordas do terreno com cercas de carvalho
         markBorders(baseLocation, size);
 
         player.sendMessage(ChatColor.GREEN + "Terreno comprado com sucesso! Tamanho: " + size + " blocos.");
@@ -96,12 +94,10 @@ public class ComprarCommand implements CommandExecutor {
                     Location fenceLocation = baseLocation.clone().add(x, 0, z);
                     Block block = fenceLocation.getBlock();
 
-                    // Subir até encontrar um bloco sólido para colocar a cerca
                     while (!block.getType().isSolid() && block.getY() > 0) {
                         block = block.getRelative(0, -1, 0);
                     }
 
-                    // Colocar cerca de carvalho
                     block.getRelative(0, 1, 0).setType(Material.OAK_FENCE);
                 }
             }

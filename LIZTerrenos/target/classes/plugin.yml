@@ -7,21 +7,13 @@ depend: [Vault]
 commands:
   comprar:
     description: Comando para comprar terrenos.
-    usage: /comprar <pequeno|medio|grande>
-  vender:
-    description: Comando para vender terrenos.
-    usage: /vender
+    usage: /comprar <pequeno | medio | grande>
   confiar:
     description: Adiciona um jogador à lista de confiança.
     usage: /confiar <nick>
   desconfiar:
     description: Remove um jogador da lista de confiança.
     usage: /desconfiar <nick>
-  terrenoadmin:
-    description: Comando de administração de terrenos.
-    usage: /terrenoadmin
-    permission: lizterreno.admin
   terreno:
-    description: Recarrega a configuração do plugin.
-    usage: /terreno reload
-    permission: lizterreno.admin
+    description: Comando principal para gerenciamento de terrenos
+    aliases: [terreno]

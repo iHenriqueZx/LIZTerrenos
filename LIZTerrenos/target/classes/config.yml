@@ -2,15 +2,14 @@
 terrenos:
   pequeno:
     tamanho: 10
-    custo: 100.0
+    custo: 10000.0
   medio:
     tamanho: 20
-    custo: 250.0
+    custo: 20000.0
   grande:
     tamanho: 30
-    custo: 500.0
-
-# Configuração de banco de dados
+    custo: 30000.0
+# Configuração de banco de dados, use 'false' para SQLite e 'true' para MySQL
 MySQL: false
 mysql:
   host: "localhost"
