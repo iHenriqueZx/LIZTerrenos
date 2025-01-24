@@ -21,11 +21,13 @@ public class VenderCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        Location playerLocation = player.getLocation();
 
         String playerUUID = player.getUniqueId().toString();
-        Terreno terreno = LIZTerrenos.getInstance().getDatabaseManager().getTerrenoByOwner(playerUUID);
-        if (terreno == null) {
-            player.sendMessage(ChatColor.RED + "Você não possui um terreno para vender.");
+        Terreno terreno = LIZTerrenos.getInstance().getDatabaseManager().getTerrenoByLocation(playerLocation);
+
+        if (terreno == null || !terreno.getOwner().equals(playerUUID)) {
+            player.sendMessage(ChatColor.RED + "Você não está em um terreno seu para vender.");
             return true;
         }
 
@@ -46,6 +48,7 @@ public class VenderCommand implements CommandExecutor {
         player.sendMessage(ChatColor.GREEN + "Você vendeu seu terreno por " + ChatColor.YELLOW + "$" + refund);
         return true;
     }
+
     private void removeBorders(Location baseLocation, int size) {
         int halfSize = size / 2;
         int minY = baseLocation.getBlockY();

@@ -9,6 +9,11 @@ terrenos:
   grande:
     tamanho: 30
     custo: 30000.0
+# Mundos bloqueados, use [] para não bloquear nenhum
+mundos_bloqueados:
+  - spawn
+  - nether
+  - end
 # Configuração de banco de dados, use 'false' para SQLite e 'true' para MySQL
 MySQL: false
 mysql:

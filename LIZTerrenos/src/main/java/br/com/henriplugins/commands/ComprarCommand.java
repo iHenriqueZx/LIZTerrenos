@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComprarCommand implements CommandExecutor {
 
@@ -23,6 +24,13 @@ public class ComprarCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        String worldName = player.getWorld().getName();
+        List<String> mundosBloqueados = LIZTerrenos.getInstance().getConfig().getStringList("mundos_bloqueados");
+
+        if (mundosBloqueados.contains(worldName)) {
+            player.sendMessage(ChatColor.RED + "Não é possível comprar terrenos neste mundo.");
+            return true;
+        }
 
         if (args.length != 1) {
             player.sendMessage(ChatColor.RED + "Uso correto: /comprar <pequeno | medio | grande>");
