@@ -3,6 +3,7 @@ package br.com.henriplugins;
 import br.com.henriplugins.commands.*;
 import br.com.henriplugins.database.DatabaseManager;
 import br.com.henriplugins.listeners.TerrenoListener;
+import br.com.henriplugins.listeners.TerrenoPlaceListener;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -45,6 +46,7 @@ public class LIZTerrenos extends JavaPlugin {
         getCommand("desconfiar").setExecutor(new DesconfiarCommand());
         getCommand("terreno").setExecutor(new TerrenoCommand());
         getServer().getPluginManager().registerEvents(new TerrenoListener(databaseManager), this);
+        getServer().getPluginManager().registerEvents(new TerrenoPlaceListener(), this);
 
         getLogger().info("LIZTerrenos habilitado com sucesso!");
     }

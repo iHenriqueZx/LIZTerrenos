@@ -24,6 +24,7 @@ public class VenderCommand implements CommandExecutor {
         Location playerLocation = player.getLocation();
 
         String playerUUID = player.getUniqueId().toString();
+
         Terreno terreno = LIZTerrenos.getInstance().getDatabaseManager().getTerrenoByLocation(playerLocation);
 
         if (terreno == null || !terreno.getOwner().equals(playerUUID)) {
@@ -31,12 +32,14 @@ public class VenderCommand implements CommandExecutor {
             return true;
         }
 
+        int terrenoId = terreno.getId();
+
         double refund = terreno.getCost() * 0.5;
 
         removeBorders(terreno.getCorner1(), terreno.getSize());
 
         try {
-            LIZTerrenos.getInstance().getDatabaseManager().deleteTerreno(terreno);
+            LIZTerrenos.getInstance().getDatabaseManager().deleteTerrenoById(terrenoId);
         } catch (Exception e) {
             player.sendMessage(ChatColor.RED + "Erro ao remover o terreno. Contate um administrador.");
             e.printStackTrace();

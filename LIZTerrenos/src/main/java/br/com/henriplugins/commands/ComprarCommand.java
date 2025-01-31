@@ -78,7 +78,9 @@ public class ComprarCommand implements CommandExecutor {
         Location corner1 = baseLocation.clone().add(-halfSize, 0, -halfSize);
         Location corner2 = baseLocation.clone().add(halfSize, 0, halfSize);
 
-        Terreno terreno = new Terreno(player.getUniqueId().toString(), size, corner1, corner2, new ArrayList<>(), cost);
+        int id = generateUniqueId();
+        String owner = player.getUniqueId().toString();
+        Terreno terreno = new Terreno(id, owner, size, corner1, corner2, new ArrayList<>(), cost);
         try {
             LIZTerrenos.getInstance().getDatabaseManager().saveTerreno(player, terreno);
         } catch (Exception e) {
@@ -110,5 +112,8 @@ public class ComprarCommand implements CommandExecutor {
                 }
             }
         }
+    }
+    private int generateUniqueId() {
+        return (int) (Math.random() * Integer.MAX_VALUE);
     }
 }

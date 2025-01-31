@@ -4,10 +4,14 @@ br\com\henriplugins\commands\ConfiarCommand.class
 br\com\henriplugins\commands\ReloadCommand.class
 br\com\henriplugins\listeners\TerrenoListener.class
 br\com\henriplugins\models\Terreno.class
-br\com\henriplugins\commands\DesconfiarCommand.class
 br\com\henriplugins\commands\TerrenoAdminCommand.class
+br\com\henriplugins\commands\DesconfiarCommand.class
+br\com\henriplugins\utils\TerrenoManager.class
 br\com\henriplugins\database\DatabaseManager.class
+br\com\henriplugins\listeners\TerrenoPlaceListener.class
+br\com\henriplugins\utils\ItemManager.class
 br\com\henriplugins\config\ConfigManager.class
 br\com\henriplugins\commands\TerrenoCommand.class
 br\com\henriplugins\LIZTerrenos.class
 br\com\henriplugins\commands\ComprarCommand.class
+br\com\henriplugins\commands\TerrenoGiveCommand.class

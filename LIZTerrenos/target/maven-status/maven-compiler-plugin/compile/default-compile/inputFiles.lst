@@ -3,11 +3,14 @@ D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\Te
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\TerrenoCommand.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\config\ConfigManager.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\ComprarCommand.java
+D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\utils\TerrenoManager.java
+D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\utils\ItemManager.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\ConfiarCommand.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\listeners\TerrenoListener.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\ReloadCommand.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\VenderCommand.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\DesconfiarCommand.java
+D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\TerrenoGiveCommand.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\models\Terreno.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\database\DatabaseManager.java
 D:\Portifólio\Plugins\LIZTerrenos\src\main\java\br\com\henriplugins\commands\InfoCommand.java

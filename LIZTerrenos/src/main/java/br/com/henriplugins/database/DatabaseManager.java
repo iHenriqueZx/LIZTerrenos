@@ -88,6 +88,31 @@ public class DatabaseManager {
         }
     }
 
+    public Terreno getTerrenoById(int id) {
+        String query = "SELECT * FROM terrenos WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToTerreno(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteTerrenoById(int id) {
+        String query = "DELETE FROM terrenos WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Terreno getTerrenoByOwner(String ownerUUID) {
         String sql = "SELECT * FROM terrenos WHERE owner_uuid = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -129,9 +154,9 @@ public class DatabaseManager {
     }
 
     public void deleteTerreno(Terreno terreno) {
-        String sql = "DELETE FROM terrenos WHERE owner_uuid = ?";
+        String sql = "DELETE FROM terrenos WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, terreno.getOwner().toString());
+            statement.setInt(1, terreno.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             LIZTerrenos.getInstance().getLogger().log(Level.SEVERE, "Erro ao excluir terreno", e);
@@ -176,6 +201,8 @@ public class DatabaseManager {
 
         double cost = resultSet.getDouble("cost");
 
-        return new Terreno(ownerUUID, size, corner1, corner2, trustedPlayers, cost);
+        int id = resultSet.getInt("id");
+
+        return new Terreno(id, ownerUUID, size, corner1, corner2, trustedPlayers, cost);
     }
 }
