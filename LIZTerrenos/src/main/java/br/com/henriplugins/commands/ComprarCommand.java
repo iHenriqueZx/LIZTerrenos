@@ -78,6 +78,16 @@ public class ComprarCommand implements CommandExecutor {
         Location corner1 = baseLocation.clone().add(-halfSize, 0, -halfSize);
         Location corner2 = baseLocation.clone().add(halfSize, 0, halfSize);
 
+        for (int x = -halfSize; x <= halfSize; x++) {
+            for (int z = -halfSize; z <= halfSize; z++) {
+                Location checkLocation = baseLocation.clone().add(x, 0, z);
+                if (LIZTerrenos.getInstance().getDatabaseManager().getTerrenoByLocation(checkLocation) != null) {
+                    player.sendMessage(ChatColor.RED + "Este local já está protegido por outro terreno.");
+                    return true;
+                }
+            }
+        }
+
         int id = generateUniqueId();
         String owner = player.getUniqueId().toString();
         Terreno terreno = new Terreno(id, owner, size, corner1, corner2, new ArrayList<>(), cost);

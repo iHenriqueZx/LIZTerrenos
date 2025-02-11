@@ -2,6 +2,7 @@ package br.com.henriplugins;
 
 import br.com.henriplugins.commands.*;
 import br.com.henriplugins.database.DatabaseManager;
+import br.com.henriplugins.listeners.TerrenoEnterListener;
 import br.com.henriplugins.listeners.TerrenoListener;
 import br.com.henriplugins.listeners.TerrenoPlaceListener;
 import net.milkbowl.vault.economy.Economy;
@@ -47,6 +48,7 @@ public class LIZTerrenos extends JavaPlugin {
         getCommand("terreno").setExecutor(new TerrenoCommand());
         getServer().getPluginManager().registerEvents(new TerrenoListener(databaseManager), this);
         getServer().getPluginManager().registerEvents(new TerrenoPlaceListener(), this);
+        getServer().getPluginManager().registerEvents(new TerrenoEnterListener(databaseManager),this);
 
         getLogger().info("LIZTerrenos habilitado com sucesso!");
     }

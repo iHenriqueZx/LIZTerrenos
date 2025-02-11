@@ -10,6 +10,7 @@ br\com\henriplugins\utils\TerrenoManager.class
 br\com\henriplugins\database\DatabaseManager.class
 br\com\henriplugins\listeners\TerrenoPlaceListener.class
 br\com\henriplugins\utils\ItemManager.class
+br\com\henriplugins\listeners\TerrenoEnterListener.class
 br\com\henriplugins\config\ConfigManager.class
 br\com\henriplugins\commands\TerrenoCommand.class
 br\com\henriplugins\LIZTerrenos.class

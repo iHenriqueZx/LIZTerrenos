@@ -35,18 +35,6 @@ public class Terreno {
         return owner;
     }
 
-    public Location getCenter() {
-        if (corner1 == null || corner2 == null) {
-            return null;
-        }
-
-        double centerX = (corner1.getX() + corner2.getX()) / 2;
-        double centerY = (corner1.getY() + corner2.getY()) / 2;
-        double centerZ = (corner1.getZ() + corner2.getZ()) / 2;
-
-        return new Location(corner1.getWorld(), centerX, centerY, centerZ);
-    }
-
     public int getSize() {
         return size;
     }
